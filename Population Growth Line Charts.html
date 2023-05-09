@@ -1,0 +1,67 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+			<style>
+			body {
+			  font-family: "Lato", sans-serif;
+			}
+
+			.sidenav {
+			  width: 380px;
+			  position: fixed;
+			  z-index: 1;
+			  top: 20px;
+			  right: 10px;
+			  background: #eee;
+			  opacity: 50%;
+			  overflow-x: hidden;
+			  padding: 8px 0;
+			}
+
+			.sidenav a {
+			  padding: 6px 8px 6px 16px;
+			  text-decoration: none;
+			  font-size: 25px;
+			  color: #2196F3;
+			  display: block;
+			}
+
+			.sidenav a:hover {
+			  color: #064579;
+			}
+
+			.main {
+			  margin-right: 140px; /* Same width as the sidebar + left position in px */
+			  font-size: 28px; /* Increased text to enable scrolling */
+			  padding: 0px 10px;
+			}
+
+			@media screen and (max-height: 450px) {
+			  .sidenav {padding-top: 15px;}
+			  .sidenav a {font-size: 18px;}
+			}
+			</style>
+		</head>
+	<body>
+
+	<div class="sidenav">
+	  <a href="Random Charts.html">Random Charts</a>
+	  <a href="Population Growth Bar Charts.html">Population Growth Bar Charts</a>
+	  <a href="NDP Performance.html">NDP Performance</a>
+	</div>
+
+	<body>
+		
+		<!--Edmonton and Calgary's Population Growth Compared Since 1901-->
+		<div class="flourish-embed flourish-chart" data-src="visualisation/13650655" data-height="98%">
+			<script src="https://public.flourish.studio/resources/embed.js">
+			</script>
+		</div>
+
+		<!--Population Growth of Multiple Minor Alberta Population Centers Compared-->
+		<div class="flourish-embed flourish-chart" data-src="visualisation/13650819" data-height="82%">
+			<script src="https://public.flourish.studio/resources/embed.js">
+			</script>
+		</div>
+	</body>
+</html>
