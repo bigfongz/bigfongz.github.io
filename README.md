@@ -1,5 +1,7 @@
 # bigfongz.github.io
 <div>
+	<a href="Alberta Maps.html">Alberta Maps</a>
+	<br>
 	<a href="NDP Performance.html">NDP Performance</a>
 	<br>
 	<a href="Population Growth Bar Charts.html">Population Growth Bar Charts</a>
