@@ -1,12 +1,4 @@
 # bigfongz.github.io
 <div>
-	<a href="Alberta Maps.html">Alberta Maps</a>
-	<br>
-	<a href="NDP Performance.html">NDP Performance</a>
-	<br>
-	<a href="Population Growth Bar Charts.html">Population Growth Bar Charts</a>
-	<br>
-	<a href="Population Growth Line Charts.html">Population Growth Line Charts</a>
-	<br>
-	<a href="Random Charts.html">Random Charts</a>
+	<a href="AB Population Change.html">Population Change Between 2016 & 2021 in Every Alberta Municipality</a>
 </div>
