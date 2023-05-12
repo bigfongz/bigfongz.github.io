@@ -15,3 +15,15 @@ This is my attempt to visualize Canada's municipalities in a number of maps. I'm
 <a href="/NWT/index.html">North West Territories Census Subdivisions Map</a>
 <br>
 <a href="/Nunavut/index.html">Nunavut Census Subdivisions Map (UNABLE TO IMPLEMENT CURRENTLY)</a>
+<br>
+<a href="/Ontario/index.html">Ontario Census Subdivisions Map (NOT DONE)</a>
+<br>
+<a href="/Quebec/index.html">Quebec Census Subdivisions Map (NOT DONE)</a>
+<br>
+<a href="/NB/index.html">New Brunswick Census Subdivisions Map</a>
+<br>
+<a href="/PEI/index.html">Prince Edward Island Census Subdivisions Map</a>
+<br>
+<a href="/NS/index.html">Nova Scotia Census Subdivisions Map</a>
+<br>
+<a href="/NL/index.html">Newfoundland and Labrador Census Subdivisions Map (NOT DONE)</a>
