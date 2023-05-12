@@ -10,8 +10,8 @@ This is my attempt to visualize Canada's municipalities in a number of maps. I'm
 <br>
 <a href="/Manitoba/index.html">Manitoba Census Subdivisions Map</a>
 <br>
-<a href="/Yukon/index.html">Yukon Census Subdivisions Map (UNABLE TO IMPLEMENT CURRENTLY)</a>
+<a href="/Yukon/index.html">Yukon Census Subdivisions Map</a>
 <br>
 <a href="/NWT/index.html">North West Territories Census Subdivisions Map</a>
 <br>
-<a href="/Nunavut/index.html">Nunavut Census Subdivisions Map</a>
+<a href="/Nunavut/index.html">Nunavut Census Subdivisions Map (UNABLE TO IMPLEMENT CURRENTLY)</a>
