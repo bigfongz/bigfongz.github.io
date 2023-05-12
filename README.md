@@ -1,5 +1,7 @@
 # bigfongz.github.io
 
+This is my attempt to visualize Canada's municipalities in a number of maps. I'm somewhat being thwarted by Github's upload limit but i'll find a way around it eventually
+
 <a href="/BC/index.html">British Columbia Census Subdivisions Map</a>
 <br>
 <a href="/Alberta/index.html">Alberta Census Subdivisions Map</a>
