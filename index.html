@@ -55,13 +55,13 @@
         function pop_lcsd000b21a_e_1(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2"><strong>Municipality</strong><br />' + (feature.properties['CSDNAME'] !== null ? autolinker.link(feature.properties['CSDNAME'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['CSDNAME'] !== null ? autolinker.link(feature.properties['CSDNAME'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>Type of Municipality</strong><br />' + (feature.properties['CSDTYPE'] !== null ? autolinker.link(feature.properties['CSDTYPE'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><strong>Division Level</strong><br />' + (feature.properties['CSDTYPE'] !== null ? autolinker.link(feature.properties['CSDTYPE'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>Area (km^2)</strong><br />' + (feature.properties['LANDAREA'] !== null ? autolinker.link(feature.properties['LANDAREA'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><strong>Area (km&sup2;)</strong><br />' + (feature.properties['LANDAREA'] !== null ? autolinker.link(feature.properties['LANDAREA'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
