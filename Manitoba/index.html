@@ -63,9 +63,6 @@
                     <tr>\
                         <td colspan="2"><strong>Area (km&sup2;)</strong><br />' + (feature.properties['LANDAREA'] !== null ? autolinker.link(feature.properties['LANDAREA'].toLocaleString()) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['PRUID'] !== null ? autolinker.link(feature.properties['PRUID'].toLocaleString()) : '') + '</td>\
-                    </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
