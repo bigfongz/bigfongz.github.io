@@ -55,22 +55,13 @@
         function pop_lcsd000b21a_e_1(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2"><strong>CSDUID</strong><br />' + (feature.properties['CSDUID'] !== null ? autolinker.link(feature.properties['CSDUID'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><strong>Municipality</strong><br />' + (feature.properties['CSDNAME'] !== null ? autolinker.link(feature.properties['CSDNAME'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>DGUID</strong><br />' + (feature.properties['DGUID'] !== null ? autolinker.link(feature.properties['DGUID'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><strong>Type of Municipality</strong><br />' + (feature.properties['CSDTYPE'] !== null ? autolinker.link(feature.properties['CSDTYPE'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>CSDNAME</strong><br />' + (feature.properties['CSDNAME'] !== null ? autolinker.link(feature.properties['CSDNAME'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>CSDTYPE</strong><br />' + (feature.properties['CSDTYPE'] !== null ? autolinker.link(feature.properties['CSDTYPE'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>LANDAREA</strong><br />' + (feature.properties['LANDAREA'] !== null ? autolinker.link(feature.properties['LANDAREA'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>PRUID</strong><br />' + (feature.properties['PRUID'] !== null ? autolinker.link(feature.properties['PRUID'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><strong>Area (km^2)</strong><br />' + (feature.properties['LANDAREA'] !== null ? autolinker.link(feature.properties['LANDAREA'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
