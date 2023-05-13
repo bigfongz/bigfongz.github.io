@@ -26,4 +26,4 @@ This is my attempt to visualize Canada's municipalities in a number of maps. I'm
 <br>
 <a href="/NS/index.html">Nova Scotia Census Subdivisions Map</a>
 <br>
-<a href="/NL/index.html">Newfoundland and Labrador Census Subdivisions Map (UNABLE TO IMPLEMENT CURRENTLY)</a>
+<a href="/NL/index.html">Newfoundland and Labrador Census Subdivisions Map</a>
