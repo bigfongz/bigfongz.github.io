@@ -65,7 +65,7 @@ var styleJSON = {
             "type": "background",
             "layout": {},
             "paint": {
-                "background-color": "#ffffff"
+                "background-color": "#666666"
             }
         },
         {
@@ -73,7 +73,7 @@ var styleJSON = {
             "type": "fill",
             "source": "NewfoundlandandLabrador2021_0",
             "layout": {},
-            "paint": {'fill-opacity': ['case', ['==', ['get', 'FIRST'], 'C50'], 1.0, ['==', ['get', 'FIRST'], 'C60'], 1.0, ['==', ['get', 'FIRST'], 'C80'], 1.0, ['==', ['get', 'FIRST'], 'I40'], 1.0, ['==', ['get', 'FIRST'], 'I50'], 1.0, ['==', ['get', 'FIRST'], 'I70'], 1.0, ['==', ['get', 'FIRST'], 'L40'], 1.0, ['==', ['get', 'FIRST'], 'L50'], 1.0, ['==', ['get', 'FIRST'], 'L60'], 1.0, ['==', ['get', 'FIRST'], 'L70'], 1.0, ['==', ['get', 'FIRST'], 'L80'], 1.0, ['==', ['get', 'FIRST'], 'N50'], 1.0, 0], 'fill-color': ['case', ['==', ['get', 'FIRST'], 'C50'], '#1919a3', ['==', ['get', 'FIRST'], 'C60'], '#000099', ['==', ['get', 'FIRST'], 'C80'], '#00005c', ['==', ['get', 'FIRST'], 'I40'], '#999999', ['==', ['get', 'FIRST'], 'I50'], '#8d8d8d', ['==', ['get', 'FIRST'], 'I70'], '#737373', ['==', ['get', 'FIRST'], 'L40'], '#ff3333', ['==', ['get', 'FIRST'], 'L50'], '#ff1919', ['==', ['get', 'FIRST'], 'L60'], '#ff0000', ['==', ['get', 'FIRST'], 'L70'], '#e60000', ['==', ['get', 'FIRST'], 'L80'], '#cc0000', ['==', ['get', 'FIRST'], 'N50'], '#ff7519', '#ffffff']}
+            "paint": {'fill-opacity': ['case', ['==', ['get', 'FIRST'], 'C50'], 1.0, ['==', ['get', 'FIRST'], 'C60'], 1.0, ['==', ['get', 'FIRST'], 'C80'], 1.0, ['==', ['get', 'FIRST'], 'I40'], 1.0, ['==', ['get', 'FIRST'], 'I50'], 1.0, ['==', ['get', 'FIRST'], 'I70'], 1.0, ['==', ['get', 'FIRST'], 'L40'], 1.0, ['==', ['get', 'FIRST'], 'L50'], 1.0, ['==', ['get', 'FIRST'], 'L60'], 1.0, ['==', ['get', 'FIRST'], 'L70'], 1.0, ['==', ['get', 'FIRST'], 'L80'], 1.0, ['==', ['get', 'FIRST'], 'N50'], 1.0, 0], 'fill-color': ['case', ['==', ['get', 'FIRST'], 'C50'], '#1919a3', ['==', ['get', 'FIRST'], 'C60'], '#000099', ['==', ['get', 'FIRST'], 'C80'], '#00005c', ['==', ['get', 'FIRST'], 'I40'], '#999999', ['==', ['get', 'FIRST'], 'I50'], '#8d8d8d', ['==', ['get', 'FIRST'], 'I70'], '#737373', ['==', ['get', 'FIRST'], 'L40'], '#ff3333', ['==', ['get', 'FIRST'], 'L50'], '#ff1919', ['==', ['get', 'FIRST'], 'L60'], '#ff0000', ['==', ['get', 'FIRST'], 'L70'], '#e60000', ['==', ['get', 'FIRST'], 'L80'], '#cc0000', ['==', ['get', 'FIRST'], 'N50'], '#ff7519', '#000000']}
         }
 ,
         {
