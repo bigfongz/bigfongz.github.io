@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 1718px;
+            height: 797px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/CentralAlberta_0.js"></script>
+        <script src="data/NorthernAlberta_1.js"></script>
+        <script src="data/SouthernAlberta_2.js"></script>
+        <script src="data/RedDeer_3.js"></script>
+        <script src="data/Lethbridge_4.js"></script>
+        <script src="data/Edmonton_5.js"></script>
+        <script src="data/Calgary_6.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[48.776755741896544,-134.00616534748872],[60.24452393739053,-91.01231970623873]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        function pop_CentralAlberta_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Poll Number</strong><br />' + (feature.properties['POLLNUMBER'] !== null ? autolinker.link(feature.properties['POLLNUMBER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Riding Name</strong><br />' + (feature.properties['RIDINGNAME'] !== null ? autolinker.link(feature.properties['RIDINGNAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Winning Party</strong><br />' + (feature.properties['PTY1'] !== null ? autolinker.link(feature.properties['PTY1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Winning Candidate</strong><br />' + (feature.properties['CAND1'] !== null ? autolinker.link(feature.properties['CAND1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CentralAlberta_0_0(feature) {
+            switch(String(feature.properties['FIRST'])) {
+                case 'AP-UCP':
+                    return {
+                pane: 'pane_CentralAlberta_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,0,102,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'NDP':
+                    return {
+                pane: 'pane_CentralAlberta_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,117,25,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'NDP-UCP':
+                    return {
+                pane: 'pane_CentralAlberta_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,0,102,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'UCP':
+                    return {
+                pane: 'pane_CentralAlberta_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(25,25,163,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'UCP-NDP':
+                    return {
+                pane: 'pane_CentralAlberta_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,0,102,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'VOID':
+                    return {
+                pane: 'pane_CentralAlberta_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(25,88,224,0.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_CentralAlberta_0');
+        map.getPane('pane_CentralAlberta_0').style.zIndex = 400;
+        map.getPane('pane_CentralAlberta_0').style['mix-blend-mode'] = 'normal';
+        var layer_CentralAlberta_0 = new L.geoJson(json_CentralAlberta_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CentralAlberta_0',
+            layerName: 'layer_CentralAlberta_0',
+            pane: 'pane_CentralAlberta_0',
+            onEachFeature: pop_CentralAlberta_0,
+            style: style_CentralAlberta_0_0,
+        });
+        bounds_group.addLayer(layer_CentralAlberta_0);
+        map.addLayer(layer_CentralAlberta_0);
+        function pop_NorthernAlberta_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Poll Number</strong><br />' + (feature.properties['POLLNUMBER'] !== null ? autolinker.link(feature.properties['POLLNUMBER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Riding Name</strong><br />' + (feature.properties['RIDINGNAME'] !== null ? autolinker.link(feature.properties['RIDINGNAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Winning Party</strong><br />' + (feature.properties['PTY1'] !== null ? autolinker.link(feature.properties['PTY1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Winning Candidate</strong><br />' + (feature.properties['CAND1'] !== null ? autolinker.link(feature.properties['CAND1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_NorthernAlberta_1_0(feature) {
+            switch(String(feature.properties['FIRST'])) {
+                case 'AP-NDP':
+                    return {
+                pane: 'pane_NorthernAlberta_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,0,102,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'NDP':
+                    return {
+                pane: 'pane_NorthernAlberta_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,117,25,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'NDP-UCP':
+                    return {
+                pane: 'pane_NorthernAlberta_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,0,102,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'UCP':
+                    return {
+                pane: 'pane_NorthernAlberta_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(25,25,163,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'VOID':
+                    return {
+                pane: 'pane_NorthernAlberta_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(205,65,119,0.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_NorthernAlberta_1');
+        map.getPane('pane_NorthernAlberta_1').style.zIndex = 401;
+        map.getPane('pane_NorthernAlberta_1').style['mix-blend-mode'] = 'normal';
+        var layer_NorthernAlberta_1 = new L.geoJson(json_NorthernAlberta_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_NorthernAlberta_1',
+            layerName: 'layer_NorthernAlberta_1',
+            pane: 'pane_NorthernAlberta_1',
+            onEachFeature: pop_NorthernAlberta_1,
+            style: style_NorthernAlberta_1_0,
+        });
+        bounds_group.addLayer(layer_NorthernAlberta_1);
+        map.addLayer(layer_NorthernAlberta_1);
+        function pop_SouthernAlberta_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Poll Number</strong><br />' + (feature.properties['POLLNUMBER'] !== null ? autolinker.link(feature.properties['POLLNUMBER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Riding Name</strong><br />' + (feature.properties['RIDINGNAME'] !== null ? autolinker.link(feature.properties['RIDINGNAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Winning Party</strong><br />' + (feature.properties['PTY1'] !== null ? autolinker.link(feature.properties['PTY1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Winning Candidate</strong><br />' + (feature.properties['CAND1'] !== null ? autolinker.link(feature.properties['CAND1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SouthernAlberta_2_0(feature) {
+            switch(String(feature.properties['FIRST'])) {
+                case 'NDP':
+                    return {
+                pane: 'pane_SouthernAlberta_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,117,25,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'UCP':
+                    return {
+                pane: 'pane_SouthernAlberta_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(25,25,163,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_SouthernAlberta_2');
+        map.getPane('pane_SouthernAlberta_2').style.zIndex = 402;
+        map.getPane('pane_SouthernAlberta_2').style['mix-blend-mode'] = 'normal';
+        var layer_SouthernAlberta_2 = new L.geoJson(json_SouthernAlberta_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_SouthernAlberta_2',
+            layerName: 'layer_SouthernAlberta_2',
+            pane: 'pane_SouthernAlberta_2',
+            onEachFeature: pop_SouthernAlberta_2,
+            style: style_SouthernAlberta_2_0,
+        });
+        bounds_group.addLayer(layer_SouthernAlberta_2);
+        map.addLayer(layer_SouthernAlberta_2);
+        function pop_RedDeer_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Poll Number</strong><br />' + (feature.properties['POLLNUMBER'] !== null ? autolinker.link(feature.properties['POLLNUMBER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Riding Name</strong><br />' + (feature.properties['RIDINGNAME'] !== null ? autolinker.link(feature.properties['RIDINGNAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Winning Party</strong><br />' + (feature.properties['PTY1'] !== null ? autolinker.link(feature.properties['PTY1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Winning Candidate</strong><br />' + (feature.properties['CAND1'] !== null ? autolinker.link(feature.properties['CAND1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_RedDeer_3_0(feature) {
+            switch(String(feature.properties['FIRST'])) {
+                case 'NDP':
+                    return {
+                pane: 'pane_RedDeer_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,117,25,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'UCP':
+                    return {
+                pane: 'pane_RedDeer_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(25,25,163,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_RedDeer_3');
+        map.getPane('pane_RedDeer_3').style.zIndex = 403;
+        map.getPane('pane_RedDeer_3').style['mix-blend-mode'] = 'normal';
+        var layer_RedDeer_3 = new L.geoJson(json_RedDeer_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_RedDeer_3',
+            layerName: 'layer_RedDeer_3',
+            pane: 'pane_RedDeer_3',
+            onEachFeature: pop_RedDeer_3,
+            style: style_RedDeer_3_0,
+        });
+        bounds_group.addLayer(layer_RedDeer_3);
+        map.addLayer(layer_RedDeer_3);
+        function pop_Lethbridge_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Poll Number</strong><br />' + (feature.properties['POLLNUMBER'] !== null ? autolinker.link(feature.properties['POLLNUMBER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Riding Name</strong><br />' + (feature.properties['RIDINGNAME'] !== null ? autolinker.link(feature.properties['RIDINGNAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Winning Party</strong><br />' + (feature.properties['PTY1'] !== null ? autolinker.link(feature.properties['PTY1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Winning Candidate</strong><br />' + (feature.properties['CAND1'] !== null ? autolinker.link(feature.properties['CAND1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Lethbridge_4_0(feature) {
+            switch(String(feature.properties['FIRST'])) {
+                case 'NDP':
+                    return {
+                pane: 'pane_Lethbridge_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,117,25,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'NDP-UCP':
+                    return {
+                pane: 'pane_Lethbridge_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,0,102,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'UCP':
+                    return {
+                pane: 'pane_Lethbridge_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(25,25,163,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Lethbridge_4');
+        map.getPane('pane_Lethbridge_4').style.zIndex = 404;
+        map.getPane('pane_Lethbridge_4').style['mix-blend-mode'] = 'normal';
+        var layer_Lethbridge_4 = new L.geoJson(json_Lethbridge_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Lethbridge_4',
+            layerName: 'layer_Lethbridge_4',
+            pane: 'pane_Lethbridge_4',
+            onEachFeature: pop_Lethbridge_4,
+            style: style_Lethbridge_4_0,
+        });
+        bounds_group.addLayer(layer_Lethbridge_4);
+        map.addLayer(layer_Lethbridge_4);
+        function pop_Edmonton_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Poll Number</strong><br />' + (feature.properties['POLLNUMBER'] !== null ? autolinker.link(feature.properties['POLLNUMBER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Riding Name</strong><br />' + (feature.properties['RIDINGNAME'] !== null ? autolinker.link(feature.properties['RIDINGNAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Winning Party</strong><br />' + (feature.properties['PTY1'] !== null ? autolinker.link(feature.properties['PTY1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Winning Candidate</strong><br />' + (feature.properties['CAND1'] !== null ? autolinker.link(feature.properties['CAND1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Edmonton_5_0(feature) {
+            switch(String(feature.properties['FIRST'])) {
+                case 'AP':
+                    return {
+                pane: 'pane_Edmonton_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(25,163,163,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'NDP':
+                    return {
+                pane: 'pane_Edmonton_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,117,25,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'NDP-UCP':
+                    return {
+                pane: 'pane_Edmonton_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,0,102,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'UCP':
+                    return {
+                pane: 'pane_Edmonton_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(25,25,163,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'UCP-NDP':
+                    return {
+                pane: 'pane_Edmonton_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,0,102,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Edmonton_5');
+        map.getPane('pane_Edmonton_5').style.zIndex = 405;
+        map.getPane('pane_Edmonton_5').style['mix-blend-mode'] = 'normal';
+        var layer_Edmonton_5 = new L.geoJson(json_Edmonton_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Edmonton_5',
+            layerName: 'layer_Edmonton_5',
+            pane: 'pane_Edmonton_5',
+            onEachFeature: pop_Edmonton_5,
+            style: style_Edmonton_5_0,
+        });
+        bounds_group.addLayer(layer_Edmonton_5);
+        map.addLayer(layer_Edmonton_5);
+        function pop_Calgary_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Poll Number</strong><br />' + (feature.properties['POLLNUMBER'] !== null ? autolinker.link(feature.properties['POLLNUMBER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Riding Name</strong><br />' + (feature.properties['RIDINGNAME'] !== null ? autolinker.link(feature.properties['RIDINGNAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Winning Party</strong><br />' + (feature.properties['PTY1'] !== null ? autolinker.link(feature.properties['PTY1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Winning Candidate</strong><br />' + (feature.properties['CAND1'] !== null ? autolinker.link(feature.properties['CAND1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Calgary_6_0(feature) {
+            switch(String(feature.properties['FIRST'])) {
+                case 'AP':
+                    return {
+                pane: 'pane_Calgary_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(25,163,163,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'AP-UCP':
+                    return {
+                pane: 'pane_Calgary_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,0,102,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'NDP':
+                    return {
+                pane: 'pane_Calgary_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,117,25,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'NDP-UCP':
+                    return {
+                pane: 'pane_Calgary_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,0,102,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'UCP':
+                    return {
+                pane: 'pane_Calgary_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(25,25,163,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'UCP-NDP':
+                    return {
+                pane: 'pane_Calgary_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,0,102,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Calgary_6');
+        map.getPane('pane_Calgary_6').style.zIndex = 406;
+        map.getPane('pane_Calgary_6').style['mix-blend-mode'] = 'normal';
+        var layer_Calgary_6 = new L.geoJson(json_Calgary_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Calgary_6',
+            layerName: 'layer_Calgary_6',
+            pane: 'pane_Calgary_6',
+            onEachFeature: pop_Calgary_6,
+            style: style_Calgary_6_0,
+        });
+        bounds_group.addLayer(layer_Calgary_6);
+        map.addLayer(layer_Calgary_6);
+        setBounds();
+        </script>
+    </body>
+</html>
