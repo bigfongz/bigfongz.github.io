@@ -14,3 +14,5 @@ Map Categories
 <a href="/Rural Manitoba/index.html">Rural Manitoba</a>
 <br>
 <a href="/Rural Saskatchewan/index.html">Rural Saskatchewan</a>
+<br>
+<a href="/2015 AB CSDs/index.html">2015 Alberta Election Results by Census Subdivision</a>
