@@ -16,3 +16,5 @@ Map Categories
 <a href="/Rural Saskatchewan/index.html">Rural Saskatchewan</a>
 <br>
 <a href="/2015 AB CSDs/index.html">2015 Alberta Election Results by Census Subdivision</a>
+<br>
+<a href="/1988 NDP Minority/index.html">1988 Canadian Election NDP Minority Government Scenario</a>
