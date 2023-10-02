@@ -19,4 +19,6 @@ Map Categories
 <br>
 <a href="/1988 NDP Minority/index.html">1988 Canadian Election NDP Minority Government Scenario</a>
 <br>
-<a href="/1989 AB Narrow NDP Majority/index.html">1988 Alberta Election NDP Narrow Majority Government Scenario</a>
+<a href="/1989 AB Narrow NDP Majority/index.html">1989 Alberta Election NDP Narrow Majority Government Scenario</a>
+<br>
+<a href="/1993 AB Liberal Majority/index.html">1993 Alberta Election Liberal Majority Government Scenario</a>
