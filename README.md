@@ -18,3 +18,5 @@ Map Categories
 <a href="/2015 AB CSDs/index.html">2015 Alberta Election Results by Census Subdivision</a>
 <br>
 <a href="/1988 NDP Minority/index.html">1988 Canadian Election NDP Minority Government Scenario</a>
+<br>
+<a href="/1989 AB Narrow NDP Majority/index.html">1988 Alberta Election NDP Narrow Majority Government Scenario</a>
