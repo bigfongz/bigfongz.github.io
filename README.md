@@ -22,3 +22,5 @@ Map Categories
 <a href="/1989 AB Narrow NDP Majority/index.html">1989 Alberta Election NDP Narrow Majority Government Scenario</a>
 <br>
 <a href="/1993 AB Liberal Majority/index.html">1993 Alberta Election Liberal Majority Government Scenario</a>
+<br>
+<a href="/2012 AB PC-WP-LIB Tie/index.html">2012 Alberta Election PC/Wildrose/Liberal Three-Way Scenario</a>
