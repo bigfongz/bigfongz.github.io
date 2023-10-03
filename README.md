@@ -7,5 +7,5 @@ Map Categories
 <br>
 <a href="/althistory.html">Alt History Stuff</a>
 <br>
-<a href="/2015 AB CSDs/index.html">2015 Alberta Election Results by Census Subdivision</a>
+<a href="/realelections.html">Real Elections</a>
 <br>
