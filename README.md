@@ -5,15 +5,15 @@ Map Categories
 
 <a href="/data.html">Various Data Visualizations</a>
 <br>
-<a href="/Macleod/index.html">Alt History Thing</a>
+<a href="/althistory.html">Alt History Stuff</a>
+<br>
+<a href="/Macleod/index.html">Macleod</a>
 <br>
 <a href="/Rural Alberta/index.html">Rural Alberta</a>
 <br>
 <a href="/Rural Manitoba/index.html">Rural Manitoba</a>
 <br>
 <a href="/Rural Saskatchewan/index.html">Rural Saskatchewan</a>
-<br>
-<a href="/2015 AB CSDs/index.html">2015 Alberta Election Results by Census Subdivision</a>
 <br>
 <a href="/1988 NDP Minority/index.html">1988 Canadian Election NDP Minority Government Scenario</a>
 <br>
@@ -24,3 +24,6 @@ Map Categories
 <a href="/2012 AB PC-WP-LIB Tie/index.html">2012 Alberta Election PC/Wildrose/Liberal Three-Way Scenario</a>
 <br>
 <a href="/2023 Alberta NDP Landslide/index.html">2023 Alberta Election NDP Landslide Scenario (Let Me Cope In Peace)</a>
+<br>
+<a href="/2015 AB CSDs/index.html">2015 Alberta Election Results by Census Subdivision</a>
+<br>
