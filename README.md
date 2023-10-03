@@ -24,3 +24,5 @@ Map Categories
 <a href="/1993 AB Liberal Majority/index.html">1993 Alberta Election Liberal Majority Government Scenario</a>
 <br>
 <a href="/2012 AB PC-WP-LIB Tie/index.html">2012 Alberta Election PC/Wildrose/Liberal Three-Way Scenario</a>
+<br>
+<a href="/2023 Alberta NDP Landslide/index.html">2023 Alberta Election NDP Landslide Scenario (Let Me Cope In Peace)</a>
