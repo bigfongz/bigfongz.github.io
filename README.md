@@ -3,9 +3,7 @@
 
 Map Categories
 
-<a href="/data.html">Various Data Visualizations</a>
+<a href="/althisdirectory.html">Alt History Maps</a>
 <br>
-<a href="/althistory.html">Alt History Stuff</a>
-<br>
-<a href="/realelections.html">Real Elections</a>
+<a href="/realelections.html">Real Historical Elections</a>
 <br>
