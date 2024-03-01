@@ -11,6 +11,8 @@
 
 <a href="2021 Cape Breton Island Provincial Election/index.html">2021 Cape Breton Island Provincial Election Results</a>
 <br>
+<a href="2021 Peace River Provincial Election Results/index.html">2021 Peace River Provincial Election Results</a>
+<br>
 <a href="2021 National Capital Region Territorial Election/index.html">2021 National Capital Region Territorial Election Results</a>
 <br>
 <a href="2021 Vancouver Island Provincial Election/index.html">2021 Vancouver Island Provincial Election Results</a>
