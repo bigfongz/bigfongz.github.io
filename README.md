@@ -1,12 +1,6 @@
 # bigfongz.github.io
 
 
-<b>Census Data</b>
-
-<a href="Alberta CCS Pop Change 2016-2021/index.html">Alberta Population Percent Change 2016 -> 2021 by Consolidated Census Subdivision</a>
-<br>
-
-
 <b>Random Maps</b>
 
 <a href="Ontario 1309 Ridings 2018/index.html">2018 Ontario Provincial Election With 1309 Ridings</a>
