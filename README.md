@@ -9,11 +9,13 @@
 
 <b>Alternate Canadian Provinces and Their Legislatures</b>
 
-<a href="2021 Cape Breton Island Provincial Election/index.html">2021 Cape Breton Island Provincial Election Results</a>
+<a href="Alternate Provinces/Cascadia 2020/index.html">2020 Cascadia Provincial Election Results</a>
 <br>
-<a href="2021 Peace River Provincial Election Results/index.html">2021 Peace River Provincial Election Results</a>
+<a href="Alternate Provinces/2021 Cape Breton Island Provincial Election/index.html">2021 Cape Breton Island Provincial Election Results</a>
 <br>
-<a href="2021 National Capital Region Territorial Election/index.html">2021 National Capital Region Territorial Election Results</a>
+<a href="Alternate Provinces/2021 Peace River Provincial Election Results/index.html">2021 Peace River Provincial Election Results</a>
 <br>
-<a href="2021 Vancouver Island Provincial Election/index.html">2021 Vancouver Island Provincial Election Results</a>
+<a href="Alternate Provinces/2021 National Capital Region Territorial Election/index.html">2021 National Capital Region Territorial Election Results</a>
+<br>
+<a href="Alternate Provinces/2021 Vancouver Island Provincial Election/index.html">2021 Vancouver Island Provincial Election Results</a>
 <br>
