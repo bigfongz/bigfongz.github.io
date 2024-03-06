@@ -11,6 +11,8 @@
 
 <a href="Alternate Provinces/Cascadia 2020/index.html">2020 Cascadia Provincial Election Results</a>
 <br>
+<a href="Alternate Provinces/Aurora 2021/index.html">2021 Aurora Provincial Election Results</a>
+<br>
 <a href="Alternate Provinces/2021 Cape Breton Island Provincial Election/index.html">2021 Cape Breton Island Provincial Election Results</a>
 <br>
 <a href="Alternate Provinces/Labrador 2021/index.html">2021 Labrador Territorial Election Results</a>
