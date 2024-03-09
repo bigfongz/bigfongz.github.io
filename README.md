@@ -5,6 +5,8 @@
 
 <a href="Ontario 1309 Ridings 2018/index.html">2018 Ontario Provincial Election With 1309 Ridings</a>
 <br>
+<a href="Northern Ontario 2019/index.html">2019 Northern Ontario Provincial Election Results</a>
+<br>
 
 
 <b>Alternate Canadian Provinces and Their Legislatures</b>
