@@ -39,5 +39,7 @@
 
 <b>Ontario Ridings With 50,000 People</b>
 
+<a href="Ontario Ridings with 50,000 People/2022/index.html">2022 Ontario 285 Ridings</a>
+<br>
 <a href="Ontario Ridings with 50,000 People/2011/index.html">2011 Ontario 253 Ridings</a>
 <br>
