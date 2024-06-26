@@ -45,3 +45,9 @@
 <br>
 <a href="Ontario Ridings with 50,000 People/2022/index.html">2022 Ontario 285 Ridings</a>
 <br>
+
+
+<b>Old Kawartha Lakes Election Results</b>
+
+<a href="Kawartha Lakes/2003 Plebiscite/index.html">2003 Kawartha Lakes De-Amalgamation Plebiscite</a>
+<br>
