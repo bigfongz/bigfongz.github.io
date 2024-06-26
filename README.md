@@ -53,3 +53,9 @@
 <br>
 <a href="Kawartha Lakes/2003 Mayoral/index.html">2003 Kawartha Lakes Mayoral Election</a>
 <br>
+
+
+<b>Alberta Ridings With 10,000 People</b>
+
+<a href="Alberta Ridings with 10,000 People/Alberta 2004/index.html">2004 Alberta 202 Ridings</a>
+<br>
