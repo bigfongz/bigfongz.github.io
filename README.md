@@ -51,3 +51,5 @@
 
 <a href="Kawartha Lakes/2003 Plebiscite/index.html">2003 Kawartha Lakes De-Amalgamation Plebiscite</a>
 <br>
+<a href="Kawartha Lakes/2003 Mayoral/index.html">2003 Kawartha Lakes Mayoral Election</a>
+<br>
