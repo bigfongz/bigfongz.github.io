@@ -59,5 +59,5 @@
 
 <a href="Alberta Ridings with 10,000 People/Alberta 2004/index.html">2004 Alberta 202 Ridings</a>
 <br>
-<a href="Alberta Ridings with 10,000 People/Alberta 2008/index.html">2008 Alberta 202 Ridings</a>
+<a href="Alberta Ridings with 10,000 People/2008/index.html">2008 Alberta 202 Ridings</a>
 <br>
