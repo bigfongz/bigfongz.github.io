@@ -61,3 +61,7 @@
 <br>
 <a href="Alberta Ridings with 10,000 People/2008/index.html">2008 Alberta 202 Ridings</a>
 <br>
+<a href="Alberta Ridings with 10,000 People/2012 Alberta/index.html">2012 Alberta 243 Ridings</a>
+<br>
+<a href="Alberta Ridings with 10,000 People/2015 Alberta/index.html">2015 Alberta 243 Ridings</a>
+<br>
