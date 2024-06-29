@@ -67,3 +67,5 @@
 <br>
 <a href="Alberta Ridings with 10,000 People/2019 Alberta/index.html">2019 Alberta 243 Ridings</a>
 <br>
+<a href="Alberta Ridings with 10,000 People/2023 Alberta/index.html">2023 Alberta 277 Ridings</a>
+<br>
