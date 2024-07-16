@@ -1,0 +1,1941 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/20213_1.js"></script>
+        <script src="data/20212_2.js"></script>
+        <script src="data/20211_3.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[37.76361373859062,18.63103703500765],[78.50137483890668,169.36188330937784]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        function removeEmptyRowsFromPopupContent(content, feature) {
+         var tempDiv = document.createElement('div');
+         tempDiv.innerHTML = content;
+         var rows = tempDiv.querySelectorAll('tr');
+         for (var i = 0; i < rows.length; i++) {
+             var td = rows[i].querySelector('td.visible-with-data');
+             var key = td ? td.id : '';
+             if (td && td.classList.contains('visible-with-data') && feature.properties[key] == null) {
+                 rows[i].parentNode.removeChild(rows[i]);
+             }
+         }
+         return tempDiv.innerHTML;
+        }
+        document.querySelector(".leaflet-popup-pane").addEventListener("load", function(event) {
+          var tagName = event.target.tagName,
+            popup = map._popup;
+          // Also check if flag is already set.
+          if (tagName === "IMG" && popup && !popup._updated) {
+            popup._updated = true; // Set flag to prevent looping.
+            popup.update();
+          }
+        }, true);
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_OpenStreetMap_0');
+        map.getPane('pane_OpenStreetMap_0').style.zIndex = 400;
+        var layer_OpenStreetMap_0 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OpenStreetMap_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OpenStreetMap_0;
+        map.addLayer(layer_OpenStreetMap_0);
+        function pop_20213_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Difference</strong><br />' + (feature.properties['Difference'] !== null ? autolinker.link(feature.properties['Difference'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">UR</th>\
+                        <td>' + (feature.properties['UR'] !== null ? autolinker.link(feature.properties['UR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CPRF</th>\
+                        <td>' + (feature.properties['CPRF'] !== null ? autolinker.link(feature.properties['CPRF'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SRZP</th>\
+                        <td>' + (feature.properties['SRZP'] !== null ? autolinker.link(feature.properties['SRZP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LDPR</th>\
+                        <td>' + (feature.properties['LDPR'] !== null ? autolinker.link(feature.properties['LDPR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NP</th>\
+                        <td>' + (feature.properties['NP'] !== null ? autolinker.link(feature.properties['NP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RPPSJ</th>\
+                        <td>' + (feature.properties['RPPSJ'] !== null ? autolinker.link(feature.properties['RPPSJ'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CPCR</th>\
+                        <td>' + (feature.properties['CPCR'] !== null ? autolinker.link(feature.properties['CPCR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">YAB</th>\
+                        <td>' + (feature.properties['YAB'] !== null ? autolinker.link(feature.properties['YAB'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ROD</th>\
+                        <td>' + (feature.properties['ROD'] !== null ? autolinker.link(feature.properties['ROD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">REP</th>\
+                        <td>' + (feature.properties['REP'] !== null ? autolinker.link(feature.properties['REP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PG</th>\
+                        <td>' + (feature.properties['PG'] !== null ? autolinker.link(feature.properties['PG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CP</th>\
+                        <td>' + (feature.properties['CP'] !== null ? autolinker.link(feature.properties['CP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RPSS</th>\
+                        <td>' + (feature.properties['RPSS'] !== null ? autolinker.link(feature.properties['RPSS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">GA</th>\
+                        <td>' + (feature.properties['GA'] !== null ? autolinker.link(feature.properties['GA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">IND</th>\
+                        <td>' + (feature.properties['IND'] !== null ? autolinker.link(feature.properties['IND'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+            var popup = layer.getPopup();
+            var content = popup.getContent();
+            var updatedContent = removeEmptyRowsFromPopupContent(content, feature);
+            popup.setContent(updatedContent);
+        }
+
+        function style_20213_1_0(feature) {
+            switch(String(feature.properties['Difference'])) {
+                case 'CP +25':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,95,157,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'CPRF +1':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,137,141,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'CPRF +5':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,126,130,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'CPRF +15':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,102,107,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'CPRF +20':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,90,95,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'CPRF +30':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,78,84,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'IND +1':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(179,179,179,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'IND +5':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(172,172,172,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'IND +10':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(164,164,164,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'IND +50':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,102,102,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'LDPR +1':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,193,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'LDPR +10':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,181,221,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'PG +10':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,203,244,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'ROD +35':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,64,98,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'SRZP +1':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(249,221,128,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'SRZP +5':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(249,218,116,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'SRZP +20':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,208,77,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'SRZP +30':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(245,201,52,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +1':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(162,170,240,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +5':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,162,239,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +10':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(144,153,237,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +15':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(135,145,236,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +20':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,136,234,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +25':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,128,232,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +30':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,119,231,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +35':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,111,229,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +40':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(88,102,228,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +45':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(79,94,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +50':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(69,85,224,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +55':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(66,81,213,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +60':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(63,77,202,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +65':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(59,73,191,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +70':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(56,69,180,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +75':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(52,64,168,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +90':
+                    return {
+                pane: 'pane_20213_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(42,52,135,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_20213_1');
+        map.getPane('pane_20213_1').style.zIndex = 401;
+        map.getPane('pane_20213_1').style['mix-blend-mode'] = 'normal';
+        var layer_20213_1 = new L.geoJson(json_20213_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_20213_1',
+            layerName: 'layer_20213_1',
+            pane: 'pane_20213_1',
+            onEachFeature: pop_20213_1,
+            style: style_20213_1_0,
+        });
+        bounds_group.addLayer(layer_20213_1);
+        map.addLayer(layer_20213_1);
+        function pop_20212_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Difference</strong><br />' + (feature.properties['Difference'] !== null ? autolinker.link(feature.properties['Difference'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">UR</th>\
+                        <td>' + (feature.properties['UR'] !== null ? autolinker.link(feature.properties['UR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CPRF</th>\
+                        <td>' + (feature.properties['CPRF'] !== null ? autolinker.link(feature.properties['CPRF'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SRZP</th>\
+                        <td>' + (feature.properties['SRZP'] !== null ? autolinker.link(feature.properties['SRZP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LDPR</th>\
+                        <td>' + (feature.properties['LDPR'] !== null ? autolinker.link(feature.properties['LDPR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NP</th>\
+                        <td>' + (feature.properties['NP'] !== null ? autolinker.link(feature.properties['NP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RPPSJ</th>\
+                        <td>' + (feature.properties['RPPSJ'] !== null ? autolinker.link(feature.properties['RPPSJ'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CPCR</th>\
+                        <td>' + (feature.properties['CPCR'] !== null ? autolinker.link(feature.properties['CPCR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">YAB</th>\
+                        <td>' + (feature.properties['YAB'] !== null ? autolinker.link(feature.properties['YAB'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ROD</th>\
+                        <td>' + (feature.properties['ROD'] !== null ? autolinker.link(feature.properties['ROD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">REP</th>\
+                        <td>' + (feature.properties['REP'] !== null ? autolinker.link(feature.properties['REP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PG</th>\
+                        <td>' + (feature.properties['PG'] !== null ? autolinker.link(feature.properties['PG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CP</th>\
+                        <td>' + (feature.properties['CP'] !== null ? autolinker.link(feature.properties['CP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RPSS</th>\
+                        <td>' + (feature.properties['RPSS'] !== null ? autolinker.link(feature.properties['RPSS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">GA</th>\
+                        <td>' + (feature.properties['GA'] !== null ? autolinker.link(feature.properties['GA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">IND</th>\
+                        <td>' + (feature.properties['IND'] !== null ? autolinker.link(feature.properties['IND'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+            var popup = layer.getPopup();
+            var content = popup.getContent();
+            var updatedContent = removeEmptyRowsFromPopupContent(content, feature);
+            popup.setContent(updatedContent);
+        }
+
+        function style_20212_2_0(feature) {
+            switch(String(feature.properties['Difference'])) {
+                case 'CP +25':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,95,157,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'CPRF +1':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,137,141,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'CPRF +5':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,126,130,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'CPRF +15':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,102,107,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'CPRF +20':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,90,95,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'CPRF +30':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,78,84,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'IND +1':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(179,179,179,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'IND +5':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(172,172,172,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'IND +10':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(164,164,164,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'IND +50':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,102,102,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'LDPR +1':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,193,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'LDPR +10':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,181,221,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'PG +10':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,203,244,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'ROD +35':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,64,98,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'SRZP +1':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(249,221,128,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'SRZP +5':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(249,218,116,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'SRZP +20':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,208,77,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'SRZP +30':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(245,201,52,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +1':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(162,170,240,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +5':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,162,239,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +10':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(144,153,237,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +15':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(135,145,236,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +20':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,136,234,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +25':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,128,232,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +30':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,119,231,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +35':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,111,229,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +40':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(88,102,228,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +45':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(79,94,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +50':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(69,85,224,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +55':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(66,81,213,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +60':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(63,77,202,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +65':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(59,73,191,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +70':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(56,69,180,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +75':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(52,64,168,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +90':
+                    return {
+                pane: 'pane_20212_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(42,52,135,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_20212_2');
+        map.getPane('pane_20212_2').style.zIndex = 402;
+        map.getPane('pane_20212_2').style['mix-blend-mode'] = 'normal';
+        var layer_20212_2 = new L.geoJson(json_20212_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_20212_2',
+            layerName: 'layer_20212_2',
+            pane: 'pane_20212_2',
+            onEachFeature: pop_20212_2,
+            style: style_20212_2_0,
+        });
+        bounds_group.addLayer(layer_20212_2);
+        map.addLayer(layer_20212_2);
+        function pop_20211_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Difference</strong><br />' + (feature.properties['Difference'] !== null ? autolinker.link(feature.properties['Difference'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">UR</th>\
+                        <td>' + (feature.properties['UR'] !== null ? autolinker.link(feature.properties['UR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CPRF</th>\
+                        <td>' + (feature.properties['CPRF'] !== null ? autolinker.link(feature.properties['CPRF'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SRZP</th>\
+                        <td>' + (feature.properties['SRZP'] !== null ? autolinker.link(feature.properties['SRZP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LDPR</th>\
+                        <td>' + (feature.properties['LDPR'] !== null ? autolinker.link(feature.properties['LDPR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NP</th>\
+                        <td>' + (feature.properties['NP'] !== null ? autolinker.link(feature.properties['NP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RPPSJ</th>\
+                        <td>' + (feature.properties['RPPSJ'] !== null ? autolinker.link(feature.properties['RPPSJ'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CPCR</th>\
+                        <td>' + (feature.properties['CPCR'] !== null ? autolinker.link(feature.properties['CPCR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">YAB</th>\
+                        <td>' + (feature.properties['YAB'] !== null ? autolinker.link(feature.properties['YAB'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ROD</th>\
+                        <td>' + (feature.properties['ROD'] !== null ? autolinker.link(feature.properties['ROD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">REP</th>\
+                        <td>' + (feature.properties['REP'] !== null ? autolinker.link(feature.properties['REP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PG</th>\
+                        <td>' + (feature.properties['PG'] !== null ? autolinker.link(feature.properties['PG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CP</th>\
+                        <td>' + (feature.properties['CP'] !== null ? autolinker.link(feature.properties['CP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RPSS</th>\
+                        <td>' + (feature.properties['RPSS'] !== null ? autolinker.link(feature.properties['RPSS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">GA</th>\
+                        <td>' + (feature.properties['GA'] !== null ? autolinker.link(feature.properties['GA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">IND</th>\
+                        <td>' + (feature.properties['IND'] !== null ? autolinker.link(feature.properties['IND'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+            var popup = layer.getPopup();
+            var content = popup.getContent();
+            var updatedContent = removeEmptyRowsFromPopupContent(content, feature);
+            popup.setContent(updatedContent);
+        }
+
+        function style_20211_3_0(feature) {
+            switch(String(feature.properties['Difference'])) {
+                case 'CP +25':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,95,157,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'CPRF +1':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,137,141,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'CPRF +5':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,126,130,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'CPRF +15':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,102,107,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'CPRF +20':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,90,95,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'CPRF +30':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,78,84,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'IND +1':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(179,179,179,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'IND +5':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(172,172,172,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'IND +10':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(164,164,164,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'IND +50':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,102,102,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'LDPR +1':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,193,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'LDPR +10':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,181,221,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'PG +10':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,203,244,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'ROD +35':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,64,98,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'SRZP +1':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(249,221,128,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'SRZP +5':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(249,218,116,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'SRZP +20':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,208,77,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'SRZP +30':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(245,201,52,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +1':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(162,170,240,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +5':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,162,239,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +10':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(144,153,237,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +15':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(135,145,236,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +20':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,136,234,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +25':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,128,232,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +30':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,119,231,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +35':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,111,229,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +40':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(88,102,228,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +45':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(79,94,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +50':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(69,85,224,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +55':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(66,81,213,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +60':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(63,77,202,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +65':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(59,73,191,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +70':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(56,69,180,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +75':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(52,64,168,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'UR +90':
+                    return {
+                pane: 'pane_20211_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(42,52,135,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_20211_3');
+        map.getPane('pane_20211_3').style.zIndex = 403;
+        map.getPane('pane_20211_3').style['mix-blend-mode'] = 'normal';
+        var layer_20211_3 = new L.geoJson(json_20211_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_20211_3',
+            layerName: 'layer_20211_3',
+            pane: 'pane_20211_3',
+            onEachFeature: pop_20211_3,
+            style: style_20211_3_0,
+        });
+        bounds_group.addLayer(layer_20211_3);
+        map.addLayer(layer_20211_3);
+        setBounds();
+        </script>
+    </body>
+</html>
