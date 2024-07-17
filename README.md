@@ -9,6 +9,10 @@
 <br>
 <a href="Northern Ontario 2019/index.html">2019 Northern Ontario Provincial Election Results</a>
 <br>
+<a href="Bolivia 2021 Constituencies/index.html">2020 Bolivian Legislative Election by Constituencies</a>
+<br>
+<a href="Bolivia 2021 List Seats/index.html">2020 Bolivian Legislative Election by Regional Seats</a>
+<br>
 <a href="2021 Federal Election By Alberta Municipalities/index.html">2021 Canadian Federal Election By Alberta Municipalities</a>
 <br>
 <a href="Russia 2021/index.html">2021 Russian State Duma Election (Single-Member Constituencies)</a>
