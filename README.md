@@ -9,6 +9,8 @@
 <br>
 <a href="Northern Ontario 2019/index.html">2019 Northern Ontario Provincial Election Results</a>
 <br>
+<a href="2020 Bolivia Municipalities/index.html">2020 Bolivian Presidential Election by Municipalities</a>
+<br>
 <a href="Bolivia 2021 Constituencies/index.html">2020 Bolivian Legislative Election by Constituencies</a>
 <br>
 <a href="Bolivia 2021 List Seats/index.html">2020 Bolivian Legislative Election by Regional Seats</a>
