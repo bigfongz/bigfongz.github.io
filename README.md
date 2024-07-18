@@ -9,7 +9,11 @@
 <br>
 <a href="2019 Ukraine First Round/index.html">2019 Ukrainian Presidential Election First Round Results</a>
 <br>
+<a href="2019 Ukraine Oblasts 1/index.html">2019 Ukrainian Presidential Election First Round Results by Oblasts</a>
+<br>
 <a href="2019 Ukraine Second Round/index.html">2019 Ukrainian Presidential Election Second Round Results</a>
+<br>
+<a href="2019 Ukraine Oblasts 2/index.html">2019 Ukrainian Presidential Election Second Round Results by Oblasts</a>
 <br>
 <a href="Northern Ontario 2019/index.html">2019 Northern Ontario Provincial Election Results</a>
 <br>
