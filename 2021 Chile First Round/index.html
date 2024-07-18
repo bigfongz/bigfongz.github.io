@@ -1,0 +1,4761 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/202110_1.js"></script>
+        <script src="data/20219_2.js"></script>
+        <script src="data/20218_3.js"></script>
+        <script src="data/20217_4.js"></script>
+        <script src="data/20216_5.js"></script>
+        <script src="data/20215_6.js"></script>
+        <script src="data/20214_7.js"></script>
+        <script src="data/20213_8.js"></script>
+        <script src="data/20212_9.js"></script>
+        <script src="data/20211_10.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-56.674229663193316,-130.24271768457197],[-16.30035468303063,-45.63041280842783]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        function removeEmptyRowsFromPopupContent(content, feature) {
+         var tempDiv = document.createElement('div');
+         tempDiv.innerHTML = content;
+         var rows = tempDiv.querySelectorAll('tr');
+         for (var i = 0; i < rows.length; i++) {
+             var td = rows[i].querySelector('td.visible-with-data');
+             var key = td ? td.id : '';
+             if (td && td.classList.contains('visible-with-data') && feature.properties[key] == null) {
+                 rows[i].parentNode.removeChild(rows[i]);
+             }
+         }
+         return tempDiv.innerHTML;
+        }
+        document.querySelector(".leaflet-popup-pane").addEventListener("load", function(event) {
+          var tagName = event.target.tagName,
+            popup = map._popup;
+          // Also check if flag is already set.
+          if (tagName === "IMG" && popup && !popup._updated) {
+            popup._updated = true; // Set flag to prevent looping.
+            popup.update();
+          }
+        }, true);
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_OpenStreetMap_0');
+        map.getPane('pane_OpenStreetMap_0').style.zIndex = 400;
+        var layer_OpenStreetMap_0 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OpenStreetMap_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OpenStreetMap_0;
+        map.addLayer(layer_OpenStreetMap_0);
+        function pop_202110_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Difference</strong><br />' + (feature.properties['Difference'] !== null ? autolinker.link(feature.properties['Difference'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Kast</th>\
+                        <td>' + (feature.properties['Kast'] !== null ? autolinker.link(feature.properties['Kast'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Boric</th>\
+                        <td>' + (feature.properties['Boric'] !== null ? autolinker.link(feature.properties['Boric'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Parisi</th>\
+                        <td>' + (feature.properties['Parisi'] !== null ? autolinker.link(feature.properties['Parisi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sichel</th>\
+                        <td>' + (feature.properties['Sichel'] !== null ? autolinker.link(feature.properties['Sichel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Provoste</th>\
+                        <td>' + (feature.properties['Provoste'] !== null ? autolinker.link(feature.properties['Provoste'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Gumucio</th>\
+                        <td>' + (feature.properties['Gumucio'] !== null ? autolinker.link(feature.properties['Gumucio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Artés</th>\
+                        <td>' + (feature.properties['Artés'] !== null ? autolinker.link(feature.properties['Artés'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+            var popup = layer.getPopup();
+            var content = popup.getContent();
+            var updatedContent = removeEmptyRowsFromPopupContent(content, feature);
+            popup.setContent(updatedContent);
+        }
+
+        function style_202110_1_0(feature) {
+            switch(String(feature.properties['Difference'])) {
+                case 'Boric +1':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,137,141,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +5':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,126,130,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +10':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,114,118,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +15':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,102,107,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +20':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,90,95,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +25':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,78,84,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +1':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(162,170,240,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +5':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,162,239,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +10':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(144,153,237,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +15':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(135,145,236,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +20':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,136,234,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +25':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,128,232,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +30':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,119,231,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +35':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,111,229,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +40':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(88,102,228,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +45':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(79,94,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +1':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,193,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +5':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(134,187,224,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +10':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,181,221,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +15':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(112,175,218,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +20':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(101,169,215,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +35':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(68,150,206,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +45':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(46,138,200,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +1':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(161,148,190,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +5':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,138,184,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +20':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,106,164,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +25':
+                    return {
+                pane: 'pane_202110_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,95,157,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_202110_1');
+        map.getPane('pane_202110_1').style.zIndex = 401;
+        map.getPane('pane_202110_1').style['mix-blend-mode'] = 'normal';
+        var layer_202110_1 = new L.geoJson(json_202110_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_202110_1',
+            layerName: 'layer_202110_1',
+            pane: 'pane_202110_1',
+            onEachFeature: pop_202110_1,
+            style: style_202110_1_0,
+        });
+        bounds_group.addLayer(layer_202110_1);
+        map.addLayer(layer_202110_1);
+        function pop_20219_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Difference</strong><br />' + (feature.properties['Difference'] !== null ? autolinker.link(feature.properties['Difference'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Kast</th>\
+                        <td>' + (feature.properties['Kast'] !== null ? autolinker.link(feature.properties['Kast'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Boric</th>\
+                        <td>' + (feature.properties['Boric'] !== null ? autolinker.link(feature.properties['Boric'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Parisi</th>\
+                        <td>' + (feature.properties['Parisi'] !== null ? autolinker.link(feature.properties['Parisi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sichel</th>\
+                        <td>' + (feature.properties['Sichel'] !== null ? autolinker.link(feature.properties['Sichel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Provoste</th>\
+                        <td>' + (feature.properties['Provoste'] !== null ? autolinker.link(feature.properties['Provoste'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Gumucio</th>\
+                        <td>' + (feature.properties['Gumucio'] !== null ? autolinker.link(feature.properties['Gumucio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Artés</th>\
+                        <td>' + (feature.properties['Artés'] !== null ? autolinker.link(feature.properties['Artés'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+            var popup = layer.getPopup();
+            var content = popup.getContent();
+            var updatedContent = removeEmptyRowsFromPopupContent(content, feature);
+            popup.setContent(updatedContent);
+        }
+
+        function style_20219_2_0(feature) {
+            switch(String(feature.properties['Difference'])) {
+                case 'Boric +1':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,137,141,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +5':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,126,130,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +10':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,114,118,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +15':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,102,107,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +20':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,90,95,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +25':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,78,84,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +1':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(162,170,240,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +5':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,162,239,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +10':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(144,153,237,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +15':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(135,145,236,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +20':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,136,234,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +25':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,128,232,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +30':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,119,231,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +35':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,111,229,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +40':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(88,102,228,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +45':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(79,94,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +1':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,193,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +5':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(134,187,224,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +10':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,181,221,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +15':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(112,175,218,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +20':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(101,169,215,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +35':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(68,150,206,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +45':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(46,138,200,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +1':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(161,148,190,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +5':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,138,184,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +20':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,106,164,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +25':
+                    return {
+                pane: 'pane_20219_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,95,157,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_20219_2');
+        map.getPane('pane_20219_2').style.zIndex = 402;
+        map.getPane('pane_20219_2').style['mix-blend-mode'] = 'normal';
+        var layer_20219_2 = new L.geoJson(json_20219_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_20219_2',
+            layerName: 'layer_20219_2',
+            pane: 'pane_20219_2',
+            onEachFeature: pop_20219_2,
+            style: style_20219_2_0,
+        });
+        bounds_group.addLayer(layer_20219_2);
+        map.addLayer(layer_20219_2);
+        function pop_20218_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Difference</strong><br />' + (feature.properties['Difference'] !== null ? autolinker.link(feature.properties['Difference'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Kast</th>\
+                        <td>' + (feature.properties['Kast'] !== null ? autolinker.link(feature.properties['Kast'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Boric</th>\
+                        <td>' + (feature.properties['Boric'] !== null ? autolinker.link(feature.properties['Boric'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Parisi</th>\
+                        <td>' + (feature.properties['Parisi'] !== null ? autolinker.link(feature.properties['Parisi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sichel</th>\
+                        <td>' + (feature.properties['Sichel'] !== null ? autolinker.link(feature.properties['Sichel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Provoste</th>\
+                        <td>' + (feature.properties['Provoste'] !== null ? autolinker.link(feature.properties['Provoste'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Gumucio</th>\
+                        <td>' + (feature.properties['Gumucio'] !== null ? autolinker.link(feature.properties['Gumucio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Artés</th>\
+                        <td>' + (feature.properties['Artés'] !== null ? autolinker.link(feature.properties['Artés'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+            var popup = layer.getPopup();
+            var content = popup.getContent();
+            var updatedContent = removeEmptyRowsFromPopupContent(content, feature);
+            popup.setContent(updatedContent);
+        }
+
+        function style_20218_3_0(feature) {
+            switch(String(feature.properties['Difference'])) {
+                case 'Boric +1':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,137,141,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +5':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,126,130,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +10':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,114,118,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +15':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,102,107,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +20':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,90,95,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +25':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,78,84,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +1':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(162,170,240,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +5':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,162,239,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +10':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(144,153,237,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +15':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(135,145,236,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +20':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,136,234,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +25':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,128,232,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +30':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,119,231,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +35':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,111,229,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +40':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(88,102,228,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +45':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(79,94,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +1':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,193,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +5':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(134,187,224,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +10':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,181,221,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +15':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(112,175,218,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +20':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(101,169,215,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +35':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(68,150,206,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +45':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(46,138,200,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +1':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(161,148,190,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +5':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,138,184,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +20':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,106,164,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +25':
+                    return {
+                pane: 'pane_20218_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,95,157,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_20218_3');
+        map.getPane('pane_20218_3').style.zIndex = 403;
+        map.getPane('pane_20218_3').style['mix-blend-mode'] = 'normal';
+        var layer_20218_3 = new L.geoJson(json_20218_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_20218_3',
+            layerName: 'layer_20218_3',
+            pane: 'pane_20218_3',
+            onEachFeature: pop_20218_3,
+            style: style_20218_3_0,
+        });
+        bounds_group.addLayer(layer_20218_3);
+        map.addLayer(layer_20218_3);
+        function pop_20217_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Difference</strong><br />' + (feature.properties['Difference'] !== null ? autolinker.link(feature.properties['Difference'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Kast</th>\
+                        <td>' + (feature.properties['Kast'] !== null ? autolinker.link(feature.properties['Kast'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Boric</th>\
+                        <td>' + (feature.properties['Boric'] !== null ? autolinker.link(feature.properties['Boric'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Parisi</th>\
+                        <td>' + (feature.properties['Parisi'] !== null ? autolinker.link(feature.properties['Parisi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sichel</th>\
+                        <td>' + (feature.properties['Sichel'] !== null ? autolinker.link(feature.properties['Sichel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Provoste</th>\
+                        <td>' + (feature.properties['Provoste'] !== null ? autolinker.link(feature.properties['Provoste'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Gumucio</th>\
+                        <td>' + (feature.properties['Gumucio'] !== null ? autolinker.link(feature.properties['Gumucio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Artés</th>\
+                        <td>' + (feature.properties['Artés'] !== null ? autolinker.link(feature.properties['Artés'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+            var popup = layer.getPopup();
+            var content = popup.getContent();
+            var updatedContent = removeEmptyRowsFromPopupContent(content, feature);
+            popup.setContent(updatedContent);
+        }
+
+        function style_20217_4_0(feature) {
+            switch(String(feature.properties['Difference'])) {
+                case 'Boric +1':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,137,141,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +5':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,126,130,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +10':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,114,118,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +15':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,102,107,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +20':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,90,95,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +25':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,78,84,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +1':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(162,170,240,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +5':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,162,239,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +10':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(144,153,237,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +15':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(135,145,236,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +20':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,136,234,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +25':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,128,232,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +30':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,119,231,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +35':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,111,229,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +40':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(88,102,228,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +45':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(79,94,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +1':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,193,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +5':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(134,187,224,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +10':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,181,221,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +15':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(112,175,218,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +20':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(101,169,215,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +35':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(68,150,206,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +45':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(46,138,200,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +1':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(161,148,190,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +5':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,138,184,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +20':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,106,164,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +25':
+                    return {
+                pane: 'pane_20217_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,95,157,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_20217_4');
+        map.getPane('pane_20217_4').style.zIndex = 404;
+        map.getPane('pane_20217_4').style['mix-blend-mode'] = 'normal';
+        var layer_20217_4 = new L.geoJson(json_20217_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_20217_4',
+            layerName: 'layer_20217_4',
+            pane: 'pane_20217_4',
+            onEachFeature: pop_20217_4,
+            style: style_20217_4_0,
+        });
+        bounds_group.addLayer(layer_20217_4);
+        map.addLayer(layer_20217_4);
+        function pop_20216_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Difference</strong><br />' + (feature.properties['Difference'] !== null ? autolinker.link(feature.properties['Difference'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Kast</th>\
+                        <td>' + (feature.properties['Kast'] !== null ? autolinker.link(feature.properties['Kast'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Boric</th>\
+                        <td>' + (feature.properties['Boric'] !== null ? autolinker.link(feature.properties['Boric'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Parisi</th>\
+                        <td>' + (feature.properties['Parisi'] !== null ? autolinker.link(feature.properties['Parisi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sichel</th>\
+                        <td>' + (feature.properties['Sichel'] !== null ? autolinker.link(feature.properties['Sichel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Provoste</th>\
+                        <td>' + (feature.properties['Provoste'] !== null ? autolinker.link(feature.properties['Provoste'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Gumucio</th>\
+                        <td>' + (feature.properties['Gumucio'] !== null ? autolinker.link(feature.properties['Gumucio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Artés</th>\
+                        <td>' + (feature.properties['Artés'] !== null ? autolinker.link(feature.properties['Artés'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+            var popup = layer.getPopup();
+            var content = popup.getContent();
+            var updatedContent = removeEmptyRowsFromPopupContent(content, feature);
+            popup.setContent(updatedContent);
+        }
+
+        function style_20216_5_0(feature) {
+            switch(String(feature.properties['Difference'])) {
+                case 'Boric +1':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,137,141,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +5':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,126,130,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +10':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,114,118,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +15':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,102,107,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +20':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,90,95,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +25':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,78,84,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +1':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(162,170,240,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +5':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,162,239,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +10':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(144,153,237,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +15':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(135,145,236,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +20':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,136,234,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +25':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,128,232,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +30':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,119,231,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +35':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,111,229,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +40':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(88,102,228,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +45':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(79,94,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +1':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,193,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +5':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(134,187,224,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +10':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,181,221,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +15':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(112,175,218,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +20':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(101,169,215,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +35':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(68,150,206,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +45':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(46,138,200,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +1':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(161,148,190,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +5':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,138,184,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +20':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,106,164,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +25':
+                    return {
+                pane: 'pane_20216_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,95,157,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_20216_5');
+        map.getPane('pane_20216_5').style.zIndex = 405;
+        map.getPane('pane_20216_5').style['mix-blend-mode'] = 'normal';
+        var layer_20216_5 = new L.geoJson(json_20216_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_20216_5',
+            layerName: 'layer_20216_5',
+            pane: 'pane_20216_5',
+            onEachFeature: pop_20216_5,
+            style: style_20216_5_0,
+        });
+        bounds_group.addLayer(layer_20216_5);
+        map.addLayer(layer_20216_5);
+        function pop_20215_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Difference</strong><br />' + (feature.properties['Difference'] !== null ? autolinker.link(feature.properties['Difference'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Kast</th>\
+                        <td>' + (feature.properties['Kast'] !== null ? autolinker.link(feature.properties['Kast'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Boric</th>\
+                        <td>' + (feature.properties['Boric'] !== null ? autolinker.link(feature.properties['Boric'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Parisi</th>\
+                        <td>' + (feature.properties['Parisi'] !== null ? autolinker.link(feature.properties['Parisi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sichel</th>\
+                        <td>' + (feature.properties['Sichel'] !== null ? autolinker.link(feature.properties['Sichel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Provoste</th>\
+                        <td>' + (feature.properties['Provoste'] !== null ? autolinker.link(feature.properties['Provoste'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Gumucio</th>\
+                        <td>' + (feature.properties['Gumucio'] !== null ? autolinker.link(feature.properties['Gumucio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Artés</th>\
+                        <td>' + (feature.properties['Artés'] !== null ? autolinker.link(feature.properties['Artés'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+            var popup = layer.getPopup();
+            var content = popup.getContent();
+            var updatedContent = removeEmptyRowsFromPopupContent(content, feature);
+            popup.setContent(updatedContent);
+        }
+
+        function style_20215_6_0(feature) {
+            switch(String(feature.properties['Difference'])) {
+                case 'Boric +1':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,137,141,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +5':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,126,130,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +10':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,114,118,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +15':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,102,107,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +20':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,90,95,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +25':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,78,84,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +1':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(162,170,240,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +5':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,162,239,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +10':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(144,153,237,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +15':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(135,145,236,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +20':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,136,234,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +25':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,128,232,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +30':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,119,231,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +35':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,111,229,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +40':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(88,102,228,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +45':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(79,94,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +1':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,193,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +5':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(134,187,224,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +10':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,181,221,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +15':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(112,175,218,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +20':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(101,169,215,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +35':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(68,150,206,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +45':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(46,138,200,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +1':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(161,148,190,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +5':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,138,184,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +20':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,106,164,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +25':
+                    return {
+                pane: 'pane_20215_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,95,157,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_20215_6');
+        map.getPane('pane_20215_6').style.zIndex = 406;
+        map.getPane('pane_20215_6').style['mix-blend-mode'] = 'normal';
+        var layer_20215_6 = new L.geoJson(json_20215_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_20215_6',
+            layerName: 'layer_20215_6',
+            pane: 'pane_20215_6',
+            onEachFeature: pop_20215_6,
+            style: style_20215_6_0,
+        });
+        bounds_group.addLayer(layer_20215_6);
+        map.addLayer(layer_20215_6);
+        function pop_20214_7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Difference</strong><br />' + (feature.properties['Difference'] !== null ? autolinker.link(feature.properties['Difference'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Kast</th>\
+                        <td>' + (feature.properties['Kast'] !== null ? autolinker.link(feature.properties['Kast'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Boric</th>\
+                        <td>' + (feature.properties['Boric'] !== null ? autolinker.link(feature.properties['Boric'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Parisi</th>\
+                        <td>' + (feature.properties['Parisi'] !== null ? autolinker.link(feature.properties['Parisi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sichel</th>\
+                        <td>' + (feature.properties['Sichel'] !== null ? autolinker.link(feature.properties['Sichel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Provoste</th>\
+                        <td>' + (feature.properties['Provoste'] !== null ? autolinker.link(feature.properties['Provoste'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Gumucio</th>\
+                        <td>' + (feature.properties['Gumucio'] !== null ? autolinker.link(feature.properties['Gumucio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Artés</th>\
+                        <td>' + (feature.properties['Artés'] !== null ? autolinker.link(feature.properties['Artés'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+            var popup = layer.getPopup();
+            var content = popup.getContent();
+            var updatedContent = removeEmptyRowsFromPopupContent(content, feature);
+            popup.setContent(updatedContent);
+        }
+
+        function style_20214_7_0(feature) {
+            switch(String(feature.properties['Difference'])) {
+                case 'Boric +1':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,137,141,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +5':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,126,130,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +10':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,114,118,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +15':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,102,107,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +20':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,90,95,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +25':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,78,84,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +1':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(162,170,240,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +5':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,162,239,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +10':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(144,153,237,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +15':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(135,145,236,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +20':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,136,234,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +25':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,128,232,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +30':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,119,231,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +35':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,111,229,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +40':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(88,102,228,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +45':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(79,94,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +1':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,193,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +5':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(134,187,224,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +10':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,181,221,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +15':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(112,175,218,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +20':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(101,169,215,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +35':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(68,150,206,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +45':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(46,138,200,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +1':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(161,148,190,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +5':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,138,184,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +20':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,106,164,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +25':
+                    return {
+                pane: 'pane_20214_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,95,157,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_20214_7');
+        map.getPane('pane_20214_7').style.zIndex = 407;
+        map.getPane('pane_20214_7').style['mix-blend-mode'] = 'normal';
+        var layer_20214_7 = new L.geoJson(json_20214_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_20214_7',
+            layerName: 'layer_20214_7',
+            pane: 'pane_20214_7',
+            onEachFeature: pop_20214_7,
+            style: style_20214_7_0,
+        });
+        bounds_group.addLayer(layer_20214_7);
+        map.addLayer(layer_20214_7);
+        function pop_20213_8(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Difference</strong><br />' + (feature.properties['Difference'] !== null ? autolinker.link(feature.properties['Difference'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Kast</th>\
+                        <td>' + (feature.properties['Kast'] !== null ? autolinker.link(feature.properties['Kast'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Boric</th>\
+                        <td>' + (feature.properties['Boric'] !== null ? autolinker.link(feature.properties['Boric'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Parisi</th>\
+                        <td>' + (feature.properties['Parisi'] !== null ? autolinker.link(feature.properties['Parisi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sichel</th>\
+                        <td>' + (feature.properties['Sichel'] !== null ? autolinker.link(feature.properties['Sichel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Provoste</th>\
+                        <td>' + (feature.properties['Provoste'] !== null ? autolinker.link(feature.properties['Provoste'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Gumucio</th>\
+                        <td>' + (feature.properties['Gumucio'] !== null ? autolinker.link(feature.properties['Gumucio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Artés</th>\
+                        <td>' + (feature.properties['Artés'] !== null ? autolinker.link(feature.properties['Artés'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+            var popup = layer.getPopup();
+            var content = popup.getContent();
+            var updatedContent = removeEmptyRowsFromPopupContent(content, feature);
+            popup.setContent(updatedContent);
+        }
+
+        function style_20213_8_0(feature) {
+            switch(String(feature.properties['Difference'])) {
+                case 'Boric +1':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,137,141,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +5':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,126,130,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +10':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,114,118,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +15':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,102,107,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +20':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,90,95,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +25':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,78,84,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +1':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(162,170,240,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +5':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,162,239,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +10':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(144,153,237,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +15':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(135,145,236,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +20':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,136,234,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +25':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,128,232,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +30':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,119,231,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +35':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,111,229,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +40':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(88,102,228,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +45':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(79,94,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +1':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,193,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +5':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(134,187,224,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +10':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,181,221,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +15':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(112,175,218,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +20':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(101,169,215,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +35':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(68,150,206,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +45':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(46,138,200,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +1':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(161,148,190,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +5':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,138,184,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +20':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,106,164,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +25':
+                    return {
+                pane: 'pane_20213_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,95,157,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_20213_8');
+        map.getPane('pane_20213_8').style.zIndex = 408;
+        map.getPane('pane_20213_8').style['mix-blend-mode'] = 'normal';
+        var layer_20213_8 = new L.geoJson(json_20213_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_20213_8',
+            layerName: 'layer_20213_8',
+            pane: 'pane_20213_8',
+            onEachFeature: pop_20213_8,
+            style: style_20213_8_0,
+        });
+        bounds_group.addLayer(layer_20213_8);
+        map.addLayer(layer_20213_8);
+        function pop_20212_9(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Difference</strong><br />' + (feature.properties['Difference'] !== null ? autolinker.link(feature.properties['Difference'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Kast</th>\
+                        <td>' + (feature.properties['Kast'] !== null ? autolinker.link(feature.properties['Kast'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Boric</th>\
+                        <td>' + (feature.properties['Boric'] !== null ? autolinker.link(feature.properties['Boric'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Parisi</th>\
+                        <td>' + (feature.properties['Parisi'] !== null ? autolinker.link(feature.properties['Parisi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sichel</th>\
+                        <td>' + (feature.properties['Sichel'] !== null ? autolinker.link(feature.properties['Sichel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Provoste</th>\
+                        <td>' + (feature.properties['Provoste'] !== null ? autolinker.link(feature.properties['Provoste'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Gumucio</th>\
+                        <td>' + (feature.properties['Gumucio'] !== null ? autolinker.link(feature.properties['Gumucio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Artés</th>\
+                        <td>' + (feature.properties['Artés'] !== null ? autolinker.link(feature.properties['Artés'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+            var popup = layer.getPopup();
+            var content = popup.getContent();
+            var updatedContent = removeEmptyRowsFromPopupContent(content, feature);
+            popup.setContent(updatedContent);
+        }
+
+        function style_20212_9_0(feature) {
+            switch(String(feature.properties['Difference'])) {
+                case 'Boric +1':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,137,141,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +5':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,126,130,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +10':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,114,118,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +15':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,102,107,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +20':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,90,95,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +25':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,78,84,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +1':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(162,170,240,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +5':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,162,239,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +10':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(144,153,237,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +15':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(135,145,236,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +20':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,136,234,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +25':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,128,232,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +30':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,119,231,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +35':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,111,229,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +40':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(88,102,228,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +45':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(79,94,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +1':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,193,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +5':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(134,187,224,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +10':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,181,221,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +15':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(112,175,218,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +20':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(101,169,215,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +35':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(68,150,206,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +45':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(46,138,200,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +1':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(161,148,190,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +5':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,138,184,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +20':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,106,164,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +25':
+                    return {
+                pane: 'pane_20212_9',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,95,157,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_20212_9');
+        map.getPane('pane_20212_9').style.zIndex = 409;
+        map.getPane('pane_20212_9').style['mix-blend-mode'] = 'normal';
+        var layer_20212_9 = new L.geoJson(json_20212_9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_20212_9',
+            layerName: 'layer_20212_9',
+            pane: 'pane_20212_9',
+            onEachFeature: pop_20212_9,
+            style: style_20212_9_0,
+        });
+        bounds_group.addLayer(layer_20212_9);
+        map.addLayer(layer_20212_9);
+        function pop_20211_10(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Difference</strong><br />' + (feature.properties['Difference'] !== null ? autolinker.link(feature.properties['Difference'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Kast</th>\
+                        <td>' + (feature.properties['Kast'] !== null ? autolinker.link(feature.properties['Kast'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Boric</th>\
+                        <td>' + (feature.properties['Boric'] !== null ? autolinker.link(feature.properties['Boric'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Parisi</th>\
+                        <td>' + (feature.properties['Parisi'] !== null ? autolinker.link(feature.properties['Parisi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Sichel</th>\
+                        <td>' + (feature.properties['Sichel'] !== null ? autolinker.link(feature.properties['Sichel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Provoste</th>\
+                        <td>' + (feature.properties['Provoste'] !== null ? autolinker.link(feature.properties['Provoste'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Gumucio</th>\
+                        <td>' + (feature.properties['Gumucio'] !== null ? autolinker.link(feature.properties['Gumucio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Artés</th>\
+                        <td>' + (feature.properties['Artés'] !== null ? autolinker.link(feature.properties['Artés'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+            var popup = layer.getPopup();
+            var content = popup.getContent();
+            var updatedContent = removeEmptyRowsFromPopupContent(content, feature);
+            popup.setContent(updatedContent);
+        }
+
+        function style_20211_10_0(feature) {
+            switch(String(feature.properties['Difference'])) {
+                case 'Boric +1':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,137,141,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +5':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,126,130,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +10':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,114,118,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +15':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,102,107,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +20':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,90,95,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Boric +25':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,78,84,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +1':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(162,170,240,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +5':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,162,239,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +10':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(144,153,237,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +15':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(135,145,236,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +20':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,136,234,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +25':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,128,232,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +30':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,119,231,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +35':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,111,229,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +40':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(88,102,228,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Kast +45':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(79,94,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +1':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,193,226,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +5':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(134,187,224,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +10':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,181,221,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +15':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(112,175,218,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +20':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(101,169,215,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +35':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(68,150,206,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Parisi +45':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(46,138,200,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +1':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(161,148,190,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +5':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,138,184,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +20':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,106,164,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+                case 'Provoste +25':
+                    return {
+                pane: 'pane_20211_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,95,157,0.7019607843137254)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_20211_10');
+        map.getPane('pane_20211_10').style.zIndex = 410;
+        map.getPane('pane_20211_10').style['mix-blend-mode'] = 'normal';
+        var layer_20211_10 = new L.geoJson(json_20211_10, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_20211_10',
+            layerName: 'layer_20211_10',
+            pane: 'pane_20211_10',
+            onEachFeature: pop_20211_10,
+            style: style_20211_10_0,
+        });
+        bounds_group.addLayer(layer_20211_10);
+        map.addLayer(layer_20211_10);
+        setBounds();
+        </script>
+    </body>
+</html>
