@@ -23,6 +23,8 @@
 <br>
 <a href="Bolivia 2021 List Seats/index.html">2020 Bolivian Legislative Election by Regional Seats</a>
 <br>
+<a href="2021 Liechtenstein/index.html">2021 Liechtenstein Legislative Election Results</a>
+<br>
 <a href="2021 Chile First Round/index.html">2021 Chilean Presidential Election First Round</a>
 <br>
 <a href="2021 Chile Second Round/index.html">2021 Chilean Presidential Election Second Round</a>
