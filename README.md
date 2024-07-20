@@ -89,6 +89,8 @@
 <br>
 <a href="Korea 2022 MUN/index.html">2022 South Korean Presidential Election by Municipalities</a>
 <br>
+<a href="2022 Cuba Referendum/index.html">2022 Cuban Family Code Referendum</a>
+<br>
 <a href="2023 Andorra/index.html">2023 Andorra Legislative Election</a>
 <br>
 <a href="2024 South Korea/index.html">2024 South Korean Legislative Election</a>
