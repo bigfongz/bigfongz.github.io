@@ -7,43 +7,9 @@
 <br>
 <a href="Ontario 1309 Ridings 2018/index.html">2018 Ontario Provincial Election With 1309 Ridings</a>
 <br>
-<a href="2019 Ukraine Legislative/index.html">2019 Ukrainian Legislative Election</a>
-<br>
-<a href="2019 Ukraine Independents/index.html">2019 Ukrainian Legislative Election With Independents and Other Parties Combined</a>
-<br>
-<a href="2019 Ukraine First Round/index.html">2019 Ukrainian Presidential Election First Round Results</a>
-<br>
-<a href="2019 Ukraine Oblasts 1/index.html">2019 Ukrainian Presidential Election First Round Results by Oblasts</a>
-<br>
-<a href="2019 Ukraine Second Round/index.html">2019 Ukrainian Presidential Election Second Round Results</a>
-<br>
-<a href="2019 Ukraine Oblasts 2/index.html">2019 Ukrainian Presidential Election Second Round Results by Oblasts</a>
-<br>
 <a href="Northern Ontario 2019/index.html">2019 Northern Ontario Provincial Election Results</a>
 <br>
-<a href="2020 Bolivia Municipalities/index.html">2020 Bolivian Presidential Election by Municipalities</a>
-<br>
-<a href="Bolivia 2021 Constituencies/index.html">2020 Bolivian Legislative Election by Constituencies</a>
-<br>
-<a href="Bolivia 2021 List Seats/index.html">2020 Bolivian Legislative Election by Regional Seats</a>
-<br>
-<a href="2021 Liechtenstein/index.html">2021 Liechtenstein Legislative Election Results</a>
-<br>
-<a href="2021 Chile First Round/index.html">2021 Chilean Presidential Election First Round</a>
-<br>
-<a href="2021 Chile Second Round/index.html">2021 Chilean Presidential Election Second Round</a>
-<br>
 <a href="2021 Federal Election By Alberta Municipalities/index.html">2021 Canadian Federal Election By Alberta Municipalities</a>
-<br>
-<a href="Russia 2021/index.html">2021 Russian State Duma Election (Single-Member Constituencies)</a>
-<br>
-<a href="Russia 2021 Uni Opposition/index.html">2021 Russian State Duma Election With Less Vote Splitting(Single-Member Constituencies)</a>
-<br>
-<a href="Korea 2022 MUN/index.html">2022 South Korean Presidential Election by Municipalities</a>
-<br>
-<a href="2023 Andorra/index.html">2023 Andorra Legislative Election</a>
-<br>
-<a href="2024 South Korea/index.html">2024 South Korean Legislative Election</a>
 <br>
 
 <b>Alternate Canadian Provinces and Their Legislatures</b>
@@ -89,3 +55,40 @@
 
 
 <b><a href="Alberta Ridings with 10,000 People/index.html">Alberta Ridings With 10,000 People</a></b>
+
+
+<b>Foreign Elections</b>
+<a href="2019 Ukraine Legislative/index.html">2019 Ukrainian Legislative Election</a>
+<br>
+<a href="2019 Ukraine Independents/index.html">2019 Ukrainian Legislative Election With Independents and Other Parties Combined</a>
+<br>
+<a href="2019 Ukraine First Round/index.html">2019 Ukrainian Presidential Election First Round Results</a>
+<br>
+<a href="2019 Ukraine Oblasts 1/index.html">2019 Ukrainian Presidential Election First Round Results by Oblasts</a>
+<br>
+<a href="2019 Ukraine Second Round/index.html">2019 Ukrainian Presidential Election Second Round Results</a>
+<br>
+<a href="2019 Ukraine Oblasts 2/index.html">2019 Ukrainian Presidential Election Second Round Results by Oblasts</a>
+<br>
+<a href="2020 Bolivia Municipalities/index.html">2020 Bolivian Presidential Election by Municipalities</a>
+<br>
+<a href="Bolivia 2021 Constituencies/index.html">2020 Bolivian Legislative Election by Constituencies</a>
+<br>
+<a href="Bolivia 2021 List Seats/index.html">2020 Bolivian Legislative Election by Regional Seats</a>
+<br>
+<a href="2021 Liechtenstein/index.html">2021 Liechtenstein Legislative Election Results</a>
+<br>
+<a href="2021 Chile First Round/index.html">2021 Chilean Presidential Election First Round</a>
+<br>
+<a href="2021 Chile Second Round/index.html">2021 Chilean Presidential Election Second Round</a>
+<br>
+<a href="Russia 2021/index.html">2021 Russian State Duma Election (Single-Member Constituencies)</a>
+<br>
+<a href="Russia 2021 Uni Opposition/index.html">2021 Russian State Duma Election With Less Vote Splitting(Single-Member Constituencies)</a>
+<br>
+<a href="Korea 2022 MUN/index.html">2022 South Korean Presidential Election by Municipalities</a>
+<br>
+<a href="2023 Andorra/index.html">2023 Andorra Legislative Election</a>
+<br>
+<a href="2024 South Korea/index.html">2024 South Korean Legislative Election</a>
+<br>
