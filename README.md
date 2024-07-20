@@ -7,9 +7,11 @@
 <br>
 <a href="Ontario 1309 Ridings 2018/index.html">2018 Ontario Provincial Election With 1309 Ridings</a>
 <br>
-<a href="2019 Ukraine First Round/index.html">2019 Ukrainian Presidential Election First Round Results</a>
-<br>
 <a href="2019 Ukraine Legislative/index.html">2019 Ukrainian Legislative Election</a>
+<br>
+<a href="2019 Ukraine Independents/index.html">2019 Ukrainian Legislative Election With Independents and Other Parties Combined</a>
+<br>
+<a href="2019 Ukraine First Round/index.html">2019 Ukrainian Presidential Election First Round Results</a>
 <br>
 <a href="2019 Ukraine Oblasts 1/index.html">2019 Ukrainian Presidential Election First Round Results by Oblasts</a>
 <br>
