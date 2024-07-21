@@ -11,6 +11,8 @@
 <br>
 <a href="2021 Federal Election By Alberta Municipalities/index.html">2021 Canadian Federal Election By Alberta Municipalities</a>
 <br>
+<a href="2023 Alberta MMDs/index.html">2023 Alberta Provincial Election (Multi-Member Districts)</a>
+<br>
 
 <b>Thompson-Nicola</b>
 
