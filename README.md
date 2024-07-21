@@ -12,6 +12,11 @@
 <a href="2021 Federal Election By Alberta Municipalities/index.html">2021 Canadian Federal Election By Alberta Municipalities</a>
 <br>
 
+<b>Thompson-Nicola</b>
+
+<a href="Thompson-Nicola/2021/index.html">2021 Federal Election Results</a>
+<br>
+
 <b>Alternate Canadian Provinces and Their Legislatures</b>
 
 <a href="Alternate Provinces/Cascadia 2020/index.html">2020 Cascadia Provincial Election Results</a>
