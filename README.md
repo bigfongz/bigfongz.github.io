@@ -17,6 +17,8 @@
 <br>
 <a href="Populated Places/index.html">Alberta Populated Places</a>
 <br>
+<a href="Kamloops Neighbourhoods/index.html">Kamloops Neighbourhoods</a>
+<br>
 
 <b>Thompson-Nicola</b>
 
