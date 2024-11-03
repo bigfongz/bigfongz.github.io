@@ -19,6 +19,8 @@
 <br>
 <a href="Kamloops Neighbourhoods/index.html">Kamloops Neighbourhoods</a>
 <br>
+<a href="Prairies 2000/index.html">2000 Prairie Election Results</a>
+<br>
 
 <b>Thompson-Nicola</b>
 
