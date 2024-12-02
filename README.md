@@ -21,6 +21,8 @@
 <br>
 <a href="Prairies 2000/index.html">2000 Prairie Election Results</a>
 <br>
+<a href="Alberta EDs Historical/index.html">Alberta Historical Electoral Divisions</a>
+<br>
 
 <b>Thompson-Nicola</b>
 
