@@ -112,3 +112,8 @@
 <br>
 <a href="2024 South Korea/index.html">2024 South Korean Legislative Election</a>
 <br>
+
+<b>Graphs and Charts</b>
+
+<a href="Flourish/Flourish.html">Flourish Stuff</a>
+<br>
