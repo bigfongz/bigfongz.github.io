@@ -23,9 +23,11 @@
 <br>
 <a href="Alberta EDs Historical/index.html">Alberta Historical Electoral Divisions</a>
 <br>
-<a href="2025_Federal_Election/index.html">2025 Canadian Federal Election Results</a>
+<a href="2021_Federal_Election/index.html">2021 Canadian Federal Election Results</a>
 <br>
 <a href="2021_Federal_Election_Transposed/index.html">2021 Canadian Federal Election Results (Transposed to 2023 Representation Order)</a>
+<br>
+<a href="2025_Federal_Election/index.html">2025 Canadian Federal Election Results</a>
 <br>
 
 <b>Thompson-Nicola</b>
