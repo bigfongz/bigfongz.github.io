@@ -23,6 +23,8 @@
 <br>
 <a href="Alberta EDs Historical/index.html">Alberta Historical Electoral Divisions</a>
 <br>
+<a href="2025_Federal_Election/index.html">2025 Canadian Federal Election Results</a>
+<br>
 
 <b>Thompson-Nicola</b>
 
